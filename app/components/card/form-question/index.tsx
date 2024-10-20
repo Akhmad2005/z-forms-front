@@ -10,9 +10,10 @@ interface Props {
 	index: number;
 	form: FormInstance<any>;
 	formKey: string[] | string;
+	mode?: pageMode;
 }
 
-const FormQuestionCard = ({question, index, form, formKey}: Props) => {
+const FormQuestionCard = ({question, index, form, formKey, mode}: Props) => {
 	if (!question) {
 		return null
 	}
@@ -30,7 +31,16 @@ const FormQuestionCard = ({question, index, form, formKey}: Props) => {
 					</span>
 				</div>
 				<div className={styles['card-question']}>
-					<AnswerTypeItem formKey={formKey} form={form} type={question.answerType} placeholder={question.title}/>
+					{
+						mode != 'readonly' ?
+						<AnswerTypeItem formKey={formKey} form={form} type={question.answerType} placeholder={question.title}/> 
+						:
+						<strong>
+							{
+								form.getFieldValue(formKey)
+							}
+						</strong>
+					}
 				</div>
 			</div>
 		</Badge.Ribbon>

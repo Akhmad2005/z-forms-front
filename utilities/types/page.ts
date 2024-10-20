@@ -1,1 +1,1 @@
-type pageMode = 'create' | 'edit'
+type pageMode = 'create' | 'edit' | 'readonly'

@@ -11,7 +11,11 @@ import { ReadOnlyTemplateDetail } from '@/utilities/interfaces/template';
 import FormQuestionCard from '@/app/components/card/form-question';
 import { useRouter } from '@/i18n/routing';
 
-const FillTemplateForm = () => {
+interface Props {
+	mode?: pageMode
+}
+
+const FillTemplateForm = ({mode}: Props) => {
 	const t = useTranslations();
 	const params = useParams();
 	const router = useRouter();
@@ -26,6 +30,9 @@ const FillTemplateForm = () => {
 	const [form] = Form.useForm();
 
 	const pageMode = useMemo<pageMode>(() => {
+		if (mode) {
+			return mode;
+		}
 		if (!formId)  {
 			return 'create'
 		}
@@ -41,7 +48,7 @@ const FillTemplateForm = () => {
 		try {
 			const params = new URLSearchParams({
 				mode: 'readonly',
-				f: pageMode === 'edit' ? formId.toString() : '',
+				f: pageMode !== 'create' ? formId.toString() : '',
 			});
 			
 			if (!params.get('f')) {
@@ -170,7 +177,7 @@ const FillTemplateForm = () => {
 					answers,
 					templateId: templateData?._id,
 				})
-			} else {
+			} else if (pageMode == 'edit') {
 				updateForm({
 					answers,
 					templateId: templateData?._id,
@@ -181,7 +188,7 @@ const FillTemplateForm = () => {
 	}
 
 	useEffect(() => {
-		if (pageMode == 'edit') {
+		if (pageMode == 'edit' || pageMode == 'readonly') {
 			fetchFormDetail();
 		}
 		fetchTemplateData();
@@ -234,13 +241,13 @@ const FillTemplateForm = () => {
 							{
 								templateData?.questions.map((question, i) => (
                   <Form.Item name={question._id} key={question._id} rules={[{required: true}]}>
-										<FormQuestionCard formKey={question._id as string} form={form} question={question} index={i}/>
+										<FormQuestionCard mode={pageMode} formKey={question._id as string} form={form} question={question} index={i}/>
                   </Form.Item>
                 ))
 							}
 						</div>
 						{
-							formData && formData._id &&
+							formData && formData._id && pageMode != 'readonly' &&
 							<Form.Item>
 								<Row>
 									<Col flex={1}></Col>

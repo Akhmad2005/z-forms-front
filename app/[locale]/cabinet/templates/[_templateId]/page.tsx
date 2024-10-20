@@ -52,7 +52,7 @@ const initialPrivacyForm: TemplatePrivacyForm = {
 const App = () => {
 	const router = useRouter();
 	const params = useParams();
-	const {_id} = params;
+	const {_templateId} = params;
 	const cookies = useCookies();
 	const [mounted, setMounted] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
@@ -70,15 +70,15 @@ const App = () => {
 	const [questionsFormInstance, setQuestionsFormInstance] = useState<{ [key: string]: FormInstance<any> }>({}) 
 	const t = useTranslations();
 	const pageMode = useMemo<pageMode>(() => {
-		if (!_id)  {
+		if (!_templateId)  {
 			return 'create'
 		}
-		if (_id == 'create') {
+		if (_templateId == 'create') {
 			return 'create'
 		} else {
 			return 'edit'
 		}
-	}, [_id])
+	}, [_templateId])
 	const handleQuestionsCompact = () => {
     questionsDispatch({type: 'EDIT', index: 'all', payload: { compacted: true }}) 
   };
@@ -143,7 +143,7 @@ const App = () => {
 
 	const submitFormData = async (form: {questions: Question[]} & TemplateMainForm & TemplatePrivacyForm) => {
 		try {
-			const endpoint = pageMode === 'create' ? '/templates/create' : `/templates/${_id}`;
+			const endpoint = pageMode === 'create' ? '/templates/create' : `/templates/${_templateId}`;
 			const method = pageMode === 'create' ? 'POST' : 'PATCH';
 	
 			await fetchClient({
@@ -170,7 +170,7 @@ const App = () => {
 		setLoading(true);
 		try {
 			let data = await fetchClient({
-				endpoint: `/templates/${_id}`,
+				endpoint: `/templates/${_templateId}`,
         cookies: cookies,
 				router
 			})

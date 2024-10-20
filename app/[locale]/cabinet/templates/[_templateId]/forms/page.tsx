@@ -21,7 +21,7 @@ const App = () => {
 	const pathname = usePathname();
 	const [loading, setLoading] = useState<boolean>(false);
 	const [data, setData] = useState();
-	const {_id: templateId} = params;
+	const {_templateId} = params;
 
 	const columns: TableProps['columns'] = [
 		{
@@ -91,7 +91,7 @@ const App = () => {
 		setLoading(true);
 		try {
 			const data = await fetchClient({
-				endpoint: `/templates/${templateId}/forms`,
+				endpoint: `/templates/${_templateId}/forms`,
 				cookies: cookies,
 				router: router,
 			}); 
