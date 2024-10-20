@@ -1,0 +1,162 @@
+$toggle-size: 8px;
+$container-width: 5.625em;
+$container-height: 2.5em;
+$container-radius: 6.25em;
+$container-light-bg: #3D7EAE;
+$container-night-bg: #1D1F2C;
+$circle-container-diameter: 3.375em;
+$sun-moon-diameter: 2.125em;
+$sun-bg: #ECCA2F;
+$moon-bg: #C4C9D1;
+$spot-color: #959DB1;
+$circle-container-offset: calc((#{$circle-container-diameter} - #{$container-height}) / 2 * -1);
+$stars-color: #fff;
+$clouds-color: #F3FDFF;
+$back-clouds-color: #AACADF;
+$transition: .5s cubic-bezier(0, -0.02, 0.4, 1.25);
+$circle-transition: .3s cubic-bezier(0, -0.02, 0.35, 1.17);
+
+// SCSS module styles
+.theme-switch {
+  font-size: $toggle-size;
+
+  &__container {
+    width: $container-width;
+    height: $container-height;
+    background-color: $container-light-bg;
+    border-radius: $container-radius;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+    transition: $transition;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+      border-radius: $container-radius;
+    }
+  }
+
+  &__checkbox {
+    display: none;
+  }
+
+  &__circle-container {
+    width: $circle-container-diameter;
+    height: $circle-container-diameter;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    left: $circle-container-offset;
+    top: $circle-container-offset;
+    border-radius: $container-radius;
+    box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1);
+    display: flex;
+    transition: $circle-transition;
+    pointer-events: none;
+  }
+
+  &__sun-moon-container {
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+    width: $sun-moon-diameter;
+    height: $sun-moon-diameter;
+    margin: auto;
+    border-radius: $container-radius;
+    background-color: $sun-bg;
+    box-shadow: inset 0.062em 0.062em 0.062em rgba(254, 255, 239, 0.61), inset 0 -0.062em 0.062em #a1872a;
+    filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25));
+    transition: $transition;
+    overflow: hidden;
+  }
+
+  &__moon {
+    transform: translateX(100%);
+    width: 100%;
+    height: 100%;
+    background-color: $moon-bg;
+    border-radius: inherit;
+    box-shadow: inset 0.062em 0.062em 0.062em rgba(254, 255, 239, 0.61), inset 0 -0.062em 0.062em #969696;
+    transition: $transition;
+    position: relative;
+  }
+
+  &__spot {
+    position: absolute;
+    top: 0.75em;
+    left: 0.312em;
+    width: 0.75em;
+    height: 0.75em;
+    border-radius: $container-radius;
+    background-color: $spot-color;
+    box-shadow: inset 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25);
+
+    &:nth-of-type(2) {
+      width: 0.375em;
+      height: 0.375em;
+      top: 0.937em;
+      left: 1.375em;
+    }
+
+    &:nth-last-of-type(3) {
+      width: 0.25em;
+      height: 0.25em;
+      top: 0.312em;
+      left: 0.812em;
+    }
+  }
+
+  &__clouds {
+    width: 1.25em;
+    height: 1.25em;
+    background-color: $clouds-color;
+    border-radius: $container-radius;
+    position: absolute;
+    bottom: -0.625em;
+    left: 0.312em;
+    box-shadow: 0.937em 0.312em $clouds-color, -0.312em -0.312em $back-clouds-color;
+    transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+  }
+
+  &__stars-container {
+    position: absolute;
+    color: $stars-color;
+    top: -100%;
+    left: 0.312em;
+    width: 2.75em;
+    transition: $transition;
+  }
+
+  &__checkbox:checked + &__container {
+    background-color: $container-night-bg;
+  }
+
+  &__checkbox:checked + &__container &__circle-container {
+    left: calc(100% - #{$circle-container-offset} - #{$circle-container-diameter});
+  }
+
+  &__checkbox:checked + &__container &__moon {
+    transform: translate(0);
+  }
+
+  &__checkbox:checked + &__container &__clouds {
+    bottom: -4.062em;
+  }
+
+  &__checkbox:checked + &__container &__stars-container {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__circle-container:hover {
+    left: calc($circle-container-offset + 0.187em);
+  }
+
+  &__checkbox:checked + &__container &__circle-container:hover {
+    left: calc(100% - $circle-container-offset - $circle-container-diameter - 0.187em);
+  }
+}

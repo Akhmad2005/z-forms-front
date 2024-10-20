@@ -1,0 +1,16 @@
+.cabinet_layout{
+	min-height: 1px;
+	flex: 100% 1 1;
+	display: flex;
+	&-sidebar{
+		width: 300px;
+		flex: 300px 0 0;
+		height: 100%;
+		border-right: 1px solid var(--border-color);
+	}
+	&-page{
+		overflow: hidden;
+		width: fit-content;
+		flex: fit-content 1 1;
+	}
+}

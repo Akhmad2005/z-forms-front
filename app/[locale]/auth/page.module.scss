@@ -1,0 +1,33 @@
+.page{
+	height: 100%;
+	overflow-y: auto;
+	&-container{
+		height: 100%;
+	}
+	&-wrapper{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 100%;
+	}
+	&-card{
+		padding: 12px 24px;
+		border: 1px solid var(--border-color);
+		&-question{
+			text-align: center;
+		}
+	}
+	&-cards{
+		margin: 20px 0;
+		&-wrapper{
+			max-width: 300px;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+		&-title{
+			margin-bottom: 12px;
+		}
+	}
+}

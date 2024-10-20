@@ -1,0 +1,1 @@
+type pageMode = 'create' | 'edit'

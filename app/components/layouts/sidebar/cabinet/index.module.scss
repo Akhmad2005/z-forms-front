@@ -1,0 +1,16 @@
+.cabinet_sidebar{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	&-scroll_container{
+		overflow: hidden auto;
+		min-height: 1px;
+		flex: 100% 0 0;
+	}
+	&-skeleton_container{
+		padding: 6px 8px 0 8px;
+		display: flex;
+		gap: 6px;
+		flex-direction: column;
+	}
+}
