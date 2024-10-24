@@ -1,6 +1,7 @@
 @import '../../../../[locale]/globals/mixins';
 
 .card{
+	color: var(--text-color);
 	border: 1px solid var(--border-color);
 	padding: 6px 12px;
 	&-header{

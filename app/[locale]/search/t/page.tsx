@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, Link } from "@/i18n/routing";
 import { useCookies } from "next-client-cookies";
-import { Empty, message, Spin } from "antd";
+import { Empty, message, Spin, List } from "antd";
 import { useTranslations } from "next-intl";
 import { ReadOnlyTemplateDetail } from "@/utilities/interfaces/template";
 import CardTemplateSearch from '@/app/components/card/template/search';
@@ -26,13 +26,38 @@ const App = () => {
 			)
 		} else if (data?.length) {
 			return (
-				data.map((item) => (
-					<div>
-						<Link href={`/forms/create?templateId=${item._id}`}>
-							<CardTemplateSearch item={item}></CardTemplateSearch>
-						</Link>
-					</div>
-				))
+				<>
+					<List 
+						pagination={{
+							pageSize: 10,
+							hideOnSinglePage: true
+						}}
+						itemLayout='horizontal' 
+						dataSource={data} 
+						split={true}
+						rowKey={'_id'}
+						grid={{
+							column: 1,
+							gutter: [0, 12]
+						}}
+						renderItem={(item) => (
+							<Link href={`/forms/create?templateId=${item._id}`}>
+								<CardTemplateSearch item={item}></CardTemplateSearch>
+							</Link>
+						)}
+					/>
+						
+					{/* {
+						data.map((item) => (
+							<div>
+								<Link href={`/forms/create?templateId=${item._id}`}>
+									<CardTemplateSearch item={item}></CardTemplateSearch>
+								</Link>
+							</div>
+						))
+					}
+					<div></div> */}
+				</>
 			)
 		} else {
 			return (
