@@ -1,21 +1,26 @@
 'use client'
 import { useEffect, useMemo, useState } from 'react'
-import styles from './page.module.scss'
+import styles from './index.module.scss'
 import { message, Space, Tag, Form, Button, Row, Col, Input } from 'antd';
 import { SendOutlined } from '@ant-design/icons'
 import { useTranslations } from 'next-intl';
 import { useCookies } from 'next-client-cookies';
 import { fetchClient } from '@/utilities/functions/fetchClient';
 import { useParams, useSearchParams } from 'next/navigation';
-import { ReadOnlyTemplateDetail } from '@/utilities/interfaces/template';
+import { ReadOnlyTemplateDetail, TemplateReaction } from '@/utilities/interfaces/template';
 import FormQuestionCard from '@/app/components/card/form-question';
 import { useRouter } from '@/i18n/routing';
+import TemplateComments from '../../g/template/comments';
+import SanitizedHTML from '../../g/sanitized-html';
+import { parseJwt } from '@/utilities/functions/jwtParser';
+import LoginModal from '@/app/components/modal/login'
 
 interface Props {
 	mode?: pageMode
+	feedback?: boolean
 }
 
-const FillTemplateForm = ({mode}: Props) => {
+const FillTemplateForm = ({mode, feedback = true}: Props) => {
 	const t = useTranslations();
 	const params = useParams();
 	const router = useRouter();
@@ -26,8 +31,12 @@ const FillTemplateForm = ({mode}: Props) => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [templateData, setTemplateData] = useState<ReadOnlyTemplateDetail>();
 	const [formData, setFormData] = useState<FormDetail>();
+	const [reactionData, setReactionData] = useState<TemplateReaction>();
 	const [dataError, setDataError] = useState<string>()
 	const [form] = Form.useForm();
+	const [finished, setFinished] = useState<boolean>(false);
+	const parsedToken = parseJwt(cookies.get('auth-token'))
+	const [loginModalOpened, setLoginModalOpened] = useState<boolean>(false);
 
 	const pageMode = useMemo<pageMode>(() => {
 		if (mode) {
@@ -152,6 +161,7 @@ const FillTemplateForm = ({mode}: Props) => {
 				router,
 			})			
 			message.success(t('fetchSuccess.createdData'));
+			setFinished(true);
 		} catch (error) {
 			message.error(t('fetchError.createData'));	
 			console.error(error);
@@ -184,7 +194,6 @@ const FillTemplateForm = ({mode}: Props) => {
 				})
 			}
 		}
-
 	}
 
 	useEffect(() => {
@@ -201,10 +210,26 @@ const FillTemplateForm = ({mode}: Props) => {
 					<div className={styles['page-wrapper']}>
 						<Row justify={'center'}>
 							<Col>
+								<Button >
+									{dataError}
+								</Button>
+							</Col>
+						</Row>
+					</div>
+				</div>
+			</div>
+		)
+	}
+
+	if (finished) {
+		return (
+			<div className={styles['page']}>
+				<div className="container">
+					<div className={styles['page-wrapper']}>
+						<Row justify={'center'}>
+							<Col>
 								<Button>
-									{
-										dataError
-									}
+									{t('fetchSuccess.createdData')}
 								</Button>
 							</Col>
 						</Row>
@@ -216,13 +241,14 @@ const FillTemplateForm = ({mode}: Props) => {
 
 	return (
 		<div className={styles['page']}>
-			<div className="container">
+			<div className="">
 				<div className={styles['page-wrapper']}>
 					<div className={styles['page-header']}>
 						<h3>{templateData?.title || ''}</h3>
-						<p>
+						<SanitizedHTML htmlContent={templateData?.description}></SanitizedHTML>
+						{/* <p>
 							{templateData?.description || ''}
-						</p>
+						</p> */}
 						<span>
 							{templateData?.topic ? `${t('topic')}: ${templateData.topic}` : ''}
 						</span>
@@ -240,28 +266,42 @@ const FillTemplateForm = ({mode}: Props) => {
 						<div className={styles['page-questions']}>
 							{
 								templateData?.questions.map((question, i) => (
-                  <Form.Item name={question._id} key={question._id} rules={[{required: true}]}>
+                  <Form.Item name={question._id} key={question._id} rules={[{required: true, message: t('RequiredField')}]}>
 										<FormQuestionCard mode={pageMode} formKey={question._id as string} form={form} question={question} index={i}/>
                   </Form.Item>
                 ))
 							}
 						</div>
 						{
-							formData && formData._id && pageMode != 'readonly' &&
-							<Form.Item>
-								<Row>
+							templateData && templateData._id && pageMode != 'readonly' &&
+							<Form.Item >
+								<Row gutter={[12, 12]}>
 									<Col flex={1}></Col>
-									<Col>
-										<Button loading={loading} iconPosition='end' icon={<SendOutlined />} htmlType='submit' type='primary'>
-											{t(pageMode == 'create' ? 'submit' : 'save')}
-										</Button>
-									</Col>
+										<Col>
+											{
+												parsedToken?._id ?
+												<Button loading={loading} iconPosition='end' icon={<SendOutlined />} htmlType='submit' type='primary'>
+													{t(pageMode == 'create' ? 'submit' : 'save')}
+												</Button>
+												:
+												<Button onClick={() => setLoginModalOpened(true)} loading={loading} type='primary'>
+													{t('login')}
+												</Button>
+											}
+										</Col>
 								</Row>
 							</Form.Item>
 						}
 					</Form>
+					{
+						templateData && templateData._id && feedback &&
+						<div className={styles['page-feedbacks']}>
+							<TemplateComments templateId={templateData._id}></TemplateComments>
+						</div>
+					}
 				</div>
 			</div>
+			<LoginModal open={loginModalOpened} changeOpen={setLoginModalOpened}></LoginModal>
 		</div>
 	)
 }

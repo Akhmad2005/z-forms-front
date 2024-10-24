@@ -86,7 +86,7 @@ const App = () => {
 										{t(text == 'active' ? 'block' : 'activate')}
 									</Tag>,
 								style: {padding: 0},
-								onClick: () => handleChangeUserProp(text == 'active' ? 'block' : 'unblock', [record._id])
+								onClick: () => handleChangeUserProp(text == 'active' ? 'block' : 'unblock', record._id)
 							}]
 						}}
 					>
@@ -103,9 +103,10 @@ const App = () => {
         <div>
 					<Space>
 						<Popconfirm 
-							onConfirm={() => handleChangeUserProp('delete', [record._id])} 
+							onConfirm={() => handleChangeUserProp('delete', record._id)} 
 							placement='left' 
 							title={t('ConfirmTheAction')}
+							description={t('InformationDeleteUser')}
 						>
 							<Button type='primary' icon={<DeleteFilled/>} danger />
 						</Popconfirm>
@@ -116,7 +117,7 @@ const App = () => {
 		}
 	];
 
-	const handleChangeUserProp = async (a: ActionType, userIds: number[]) => {
+	const handleChangeUserProp = async (a: ActionType, userId: number) => {
 		try {
 			const response = await fetchClient(
 				{
@@ -124,7 +125,7 @@ const App = () => {
 					options: {
 						method: 'POST',
 						body: JSON.stringify({
-							userIds,
+							userId,
 						}),
 					},
 					router,

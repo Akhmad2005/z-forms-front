@@ -11,6 +11,7 @@ import { useCookies } from 'next-client-cookies';
 import { Link } from '@/i18n/routing';
 import { useRouter, usePathname } from '@/i18n/routing';
 import {  useSearchParams } from 'next/navigation';
+import {HomeFilled} from '@ant-design/icons'
 
 const App = () => {
 	const cookies = useCookies();
@@ -45,7 +46,7 @@ const App = () => {
 									</h1>
 									<br />
 									<Link href={'/'}>
-										<Button type='primary'>
+										<Button icon={<HomeFilled/>} >
 											{t('GoHome')}
 										</Button>
 									</Link>

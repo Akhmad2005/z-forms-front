@@ -14,6 +14,7 @@ interface Props {
 }
 
 const FormQuestionCard = ({question, index, form, formKey, mode}: Props) => {
+	
 	if (!question) {
 		return null
 	}

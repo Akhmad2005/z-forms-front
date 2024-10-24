@@ -86,5 +86,17 @@
 	"AllTemplates": "Все шаблоны",
 	"MyTemplates": "Мои шаблоны",
 	"AllForms": "Все формы",
-	"MyForms": "Мои формы"
+	"MyForms": "Мои формы",
+	"FeedbacksForTemplate": "Отзывы о шаблоне",
+	"feedback": "{count, plural, one {Отзыв} few {Отзыва} many {Отзывов} other {Отзывы}}",
+	"LeaveFeedback": "Оставить отзыв",
+	"LoginToLeaveFeedback": "Войдите, чтобы оставить отзыв",
+	"EditingTheForm": "Редактирование формы",
+	"form": "Форма",
+	"LatestTemplates": "Последние шаблоны",
+	"PopularTemplates": "Популярные шаблоны",
+	"FilledForms": "Заполненные формы",
+	"RequiredField": "Обязательное поле",
+	"SearchTemplates": "Поиск шаблонов",
+	"InformationDeleteUser": "Все ваши данные, включая личную информацию, сохраненные шаблоны и любой связанный с ними контент, будут удалены."
 }

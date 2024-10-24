@@ -50,6 +50,7 @@ const AppProvider = ({children, locale}: Props ) => {
 					colorIcon: 'var(--text-color)',
 					colorError: styles?.getPropertyValue("--error-color") || '',
 					colorTextDescription: 'var(--text-description-color)',
+					colorTextDisabled: 'var(--text-placeholder-color)',
 					colorSplit: 'var(--scroll-bg-color)',
 					colorLink: styles?.getPropertyValue("--link-color") || '',
 				},
@@ -85,7 +86,9 @@ const AppProvider = ({children, locale}: Props ) => {
 					},
 					Tag: {
 						defaultBg: 'var(--primary-color)',
-						colorTextDescription: 'var(--text-color)',
+						colorTextDescription: 'var(--text-active-color)',
+						colorTextHeading: 'var(--text-active-color)',
+						colorText: 'var(--text-active-color)'
 					},
 					Modal: {
 						contentBg: 'var(--background-color)',
@@ -94,6 +97,7 @@ const AppProvider = ({children, locale}: Props ) => {
 						controlItemBgActive: 'var(--primary-color)',
 					},
 					Button: {
+						defaultBorderColor: 'var(--border-color)',
 						colorBorder: 'var(--text-color)',
 						colorPrimaryHover: 'unset',
 						colorPrimaryActive: 'unset',
@@ -101,6 +105,9 @@ const AppProvider = ({children, locale}: Props ) => {
 					InputNumber: {
 						colorTextDescription: 'var(--text-color)',
 					},
+					Avatar: {
+						colorTextPlaceholder: 'var(--primary-color)',
+					}
 				}
 			}}
 		>

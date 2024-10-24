@@ -89,5 +89,17 @@
 	"AllTemplates": "All templates",
 	"MyTemplates": "My templates",
 	"AllForms": "All forms",
-	"MyForms": "My forms"
+	"MyForms": "My forms",
+	"FeedbacksForTemplate": "Feedbacks on the template",
+	"feedback": "{count, plural, one {Feedback} few {Feedbacks} many {Feedbacks} other {Feedbacks}}",
+	"LeaveFeedback": "Leave feedback",
+	"LoginToLeaveFeedback": "Login to leave feedback",
+	"EditingTheForm": "Editing the form",
+	"form": "Form",
+	"LatestTemplates": "Latest templates",
+	"PopularTemplates": "Popular templates",
+	"FilledForms": "Filled forms",
+	"RequiredFiled": "Required field",
+	"SearchTemplates": "Search templates",
+	"InformationDeleteUser": "All your data, including personal information, saved templates, and any associated content, will be deleted."
 }

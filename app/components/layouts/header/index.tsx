@@ -3,6 +3,7 @@ import styles from './index.module.scss'
 import LanguageSwitcher from '../../g/language-switcher'
 import ThemeSwitcher from '../../g/theme-switcher'
 import ProfileDropdown from '../../g/profileDropdown'
+import TemplateSearchInput from '../../g/templateSearchInput'
 import { Link } from '@/i18n/routing'
 
 const LayoutHeader = () => {
@@ -18,6 +19,9 @@ const LayoutHeader = () => {
 						</Link>
 					</div>
 					<div className={styles.actions}>
+						<div className={styles['actions-search']}>
+							<TemplateSearchInput></TemplateSearchInput>
+						</div>
 						<div className={styles['actions-language_switcher']}>
 							<LanguageSwitcher></LanguageSwitcher>
 						</div>

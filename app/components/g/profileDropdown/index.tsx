@@ -9,8 +9,8 @@ import { useMemo, useState } from "react";
 import { useCookies } from "next-client-cookies";
 import { exitFromAccount } from "@/utilities/functions/account";
 import { useRouter } from "@/i18n/routing";
-import CardLogin from "../../card/auth/login";
 import styles from './index.module.scss'
+import LoginModal from "../../modal/login";
 import { menuItems as cabinetSidebarMenuItems } from "@/utilities/const/menu";
 
 const ProfileDropdown = () => {
@@ -20,10 +20,6 @@ const ProfileDropdown = () => {
 	const pathName = usePathname();
 	const t = useTranslations(); 
 	const [loginModalOpened, setLoginModalOpened] = useState<boolean>(false);
-	
-	const handleLogin = () => {
-		setLoginModalOpened(false)
-	}
 
 	const menuList = useMemo<MenuProps['items']>(() => {
 		const isCabinet = pathName?.split('/').at(1) == 'cabinet';
@@ -101,37 +97,7 @@ const ProfileDropdown = () => {
 					</Avatar>
 				</Dropdown>
 			}
-			<Modal 
-				open={loginModalOpened}
-				centered
-				onCancel={() => setLoginModalOpened(false)}
-				footer={false}
-				maskClosable={false}
-				width={320}
-			>
-				<CardLogin emitFunction={handleLogin}></CardLogin>
-				<div className={styles['modal-question']}>
-					<span>
-						{
-							t.rich(
-								'DontHaveAccount', 
-								{
-									element: (children) => 
-									(<Button
-										onClick={() => {
-											setLoginModalOpened(false);
-                      router.push('/auth?authType=signup');
-										}}
-										type='link' size='small'
-									>
-										{children}
-									</Button>)
-								}
-							)  
-						}
-					</span>
-				</div>
-			</Modal>
+			<LoginModal open={loginModalOpened} changeOpen={setLoginModalOpened}></LoginModal>
 		</ div>
 	)
 }

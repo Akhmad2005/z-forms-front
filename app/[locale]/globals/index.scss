@@ -1,4 +1,4 @@
-@import 'dashbord';
+@import 'dashbord', 'home', 'mixins';
 
 :root {
   --primary-color: #ADB5BD;      
@@ -6,7 +6,7 @@
   --background-color: #F1FAEE;
   --text-color: #1C1C1C;         
   --text-active-color: #F1FAEE;         
-  --text-description-color: #D8D8D8;         
+  --text-description-color: #a7a7a7;         
   --text-placeholder-color: #1c1c1cac;         
   --border-color: #D8D8D8;       
   --error-color: #E63946;        
@@ -22,7 +22,7 @@
   --background-color: #001529; 
   --text-color: #F1FAEE;         
   --text-active-color: #F1FAEE;         
-  --text-description-color: #1d2934;
+  --text-description-color: #86a3be;
   --text-placeholder-color: #f1faeeac;         
   --border-color: #2C3E50;       
   --input-color: #2C3E50;
@@ -118,5 +118,20 @@ a {
   color: var(--text-active-color) !important;
 }
 
+.swiper-button{
+  cursor: pointer;
+  &-disabled{
+    cursor: not-allowed;
+  }
+  &-hide-disabled{
+    &.swiper-button-disabled{
+      display: none;
+    }
+  }
+}
 
-
+.sanitized-html {
+  a{
+    color: var(--link-color);
+  }
+}

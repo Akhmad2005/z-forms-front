@@ -40,7 +40,7 @@ const CardLogin = ({emitFunction}: Props) => {
 			const token = res?.token;
 			if (token) {
 				cookies.set('auth-token', token)
-				router.push('/')
+				router.refresh();
 				form.resetFields();
 				emitFunction && emitFunction();
 			}

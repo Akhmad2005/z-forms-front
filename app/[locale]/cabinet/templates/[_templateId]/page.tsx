@@ -25,6 +25,7 @@ import { useParams } from "next/navigation";
 import { Topic } from "@/utilities/interfaces/topic";
 import { Tag as TemplateTag } from "@/utilities/interfaces/tag";
 import { User } from "@/utilities/interfaces/users";
+import TinyEditor from "@/app/components/g/tiny-editor";
 
 const RowContext = React.createContext<RowContextProps>({});
 
@@ -311,7 +312,15 @@ const App = () => {
 										/>
 									</Form.Item>
 									<Form.Item rules={[{required: true}]} name="description" label={t('TemplateDescription')}>
-										<Input.TextArea 
+										<TinyEditor 
+											value={mainForm.description} 
+											onChange={(content) => {
+												setMainForm(prev => {
+													return {...prev, description: content}
+												})
+											}}
+										/>
+										{/* <Input.TextArea 
 											autoSize={{maxRows: 8, minRows: 3}} 
 											placeholder={t('TemplateDescription')}
 											onChange={(e) => {
@@ -319,7 +328,7 @@ const App = () => {
 													return {...prev, description: e.target.value}
 												})
 											}}
-										/>
+										/> */}
 									</Form.Item>
 									<Form.Item 
 										rules={[{required: true}]} 
@@ -352,7 +361,7 @@ const App = () => {
 													return (
 														<Tag onClose={props.onClose} closable> 
 															<big>
-																{`# ${props.label}`}
+																{`#${props.label} `}
 															</big>
 														</Tag>
 													)

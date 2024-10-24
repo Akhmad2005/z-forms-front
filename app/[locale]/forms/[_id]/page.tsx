@@ -1,9 +1,16 @@
 'use client'
-import FillTemplateForm from "@/app/components/form/fillTemplate"
+import FillTemplateForm from "@/app/components/form/fillTemplate/index"
+import styles from './page.module.scss'
 
 const App = () => {
 	return (
-		<FillTemplateForm/>
+		<div className={styles['page']}>
+			<div className="container">
+				<div className={styles['page-wrapper']}>
+					<FillTemplateForm/>
+				</div>
+			</div>
+		</div>
 	)
 }
 

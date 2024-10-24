@@ -3,7 +3,8 @@ import { locales } from '@/i18n/routing';
 
 const noAuthPages = [
 	'/',
-	'/auth'
+	'/auth',
+	'/forms/create'
 ];
 
 export function checkAuthentication(request: NextRequest): boolean {

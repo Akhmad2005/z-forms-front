@@ -4,6 +4,8 @@ import { AnswerTypeEnum } from "@/utilities/enums/answer"
 import { Input, InputNumber, DatePicker, TimePicker, FormInstance } from "antd"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
+import { useCookies } from 'next-client-cookies';
+import { parseJwt } from '@/utilities/functions/jwtParser';
 
 interface Props {
 	type: AnswerTypeEnum
@@ -13,14 +15,24 @@ interface Props {
 }
 
 const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
+	const cookies = useCookies();
+	const parsedToken = parseJwt(cookies.get('auth-token'));
 	const t = useTranslations();
+	const mainPlaceholder = useMemo(():string => {
+		if (parsedToken?._id) {
+			return placeholder; 
+		} else {
+			return t('login')
+		}
+	}, [placeholder])
 	const Item = useMemo(() => {
 		switch (type) {
 			case 'Input':
 				return (
 					<Input 
+						disabled={!parsedToken?._id}
 						defaultValue={form.getFieldValue(formKey)}
-						placeholder={placeholder}
+						placeholder={mainPlaceholder}
 						onChange={(e) => {
 							form.setFieldValue(formKey, e.target.value)
 						}}
@@ -29,8 +41,9 @@ const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
 			case 'InputIntegerNumber':
 				return (
 					<InputNumber 
+						disabled={!parsedToken?._id}
 						defaultValue={form.getFieldValue(formKey)}
-						placeholder={placeholder}
+						placeholder={mainPlaceholder}
 						maxLength={16}
 						style={{width: '100%'}}
 						min={0}
@@ -44,8 +57,9 @@ const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
 			case 'InputFloatNumber':
 				return (
 					<InputNumber 
+						disabled={!parsedToken?._id}
 						defaultValue={form.getFieldValue(formKey)}
-						placeholder={placeholder}
+						placeholder={mainPlaceholder}
 						maxLength={16}
 						style={{width: '100%'}}
 						min={0}
@@ -57,12 +71,13 @@ const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
 			case 'TextArea':
 				return (
 					<Input.TextArea 
+						disabled={!parsedToken?._id}
 						defaultValue={form.getFieldValue(formKey)}
 						autoSize={{
 							minRows: 3, 
 							maxRows: 4,
 						}}
-						placeholder={placeholder}
+						placeholder={mainPlaceholder}
 						onChange={(e) => {
 							form.setFieldValue(formKey, e.target.value)
 						}}
@@ -71,9 +86,10 @@ const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
 			case 'Date':
 				return (
 					<DatePicker
+						disabled={!parsedToken?._id}
 						defaultValue={form.getFieldValue(formKey)}
 						style={{width: '100%'}}
-						placeholder={placeholder}
+						placeholder={mainPlaceholder}
 						format={'DD.MM.YYYY'}
 						onChange={(_, dateString) => {
 							form.setFieldValue(formKey, dateString)
@@ -83,9 +99,10 @@ const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
 			case 'Time':
 				return (
 					<TimePicker
+						disabled={!parsedToken?._id}
 						defaultValue={form.getFieldValue(formKey)}
 						style={{width: '100%'}}
-						placeholder={placeholder}
+						placeholder={mainPlaceholder}
 						format={'HH:mm'}
 						onChange={(_, dateString) => {
 							form.setFieldValue(formKey, dateString)
@@ -95,10 +112,11 @@ const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
 			case 'DateTime':
 				return (
 					<DatePicker
+						disabled={!parsedToken?._id}
 						defaultValue={form.getFieldValue(formKey)}
 						showTime={true}
 						style={{width: '100%'}}
-						placeholder={placeholder}
+						placeholder={mainPlaceholder}
 						format={'DD.MM.YYYY HH:mm'}
 						onChange={(_, dateString) => {
 							form.setFieldValue(formKey, dateString)

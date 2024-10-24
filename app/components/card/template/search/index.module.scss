@@ -1,0 +1,29 @@
+@import '../../../../[locale]/globals/mixins';
+
+.card{
+	border: 1px solid var(--border-color);
+	padding: 6px 12px;
+	&-header{
+		margin-bottom: 12px;
+		h4{
+			margin-bottom: 4px;
+		}
+	}
+
+	&-footer{
+		display: flex;
+		align-items: flex-end
+	}
+
+	&-date{
+		margin-left: auto;
+		span{
+			color: var(--text-description-color)
+		}
+	}
+
+	&-description{
+		@include text-splice(2);
+		margin-bottom: 16px;
+  }
+}

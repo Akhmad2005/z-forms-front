@@ -1,5 +1,5 @@
 'use client'
-import FillTemplateForm from "@/app/components/form/fillTemplate"
+import FillTemplateForm from "@/app/components/form/fillTemplate/index"
 
 const App = () => {
 	return (
