@@ -18,7 +18,9 @@ const CardTemplateSearch = ({item}: Props) => {
 			<div className={styles['card-wrapper']}>
 				<header className={styles['card-header']}>
 					<h4>{item?.title || ''}</h4>
-					<SanitizedHTML htmlContent={item.description}></SanitizedHTML>
+					<div className={styles['card-description']}>
+						<SanitizedHTML htmlContent={item.description}></SanitizedHTML>
+					</div>
 				</header>
 				<footer className={styles['card-footer']}>
 					<div>

@@ -19,7 +19,7 @@ const LayoutHeader = () => {
 						</Link>
 					</div>
 					<div className={styles.actions}>
-						<div className={styles['actions-search']}>
+						<div className={`${styles['actions-search']}, ${styles['actions-search-xl']}`}>
 							<TemplateSearchInput></TemplateSearchInput>
 						</div>
 						<div className={styles['actions-language_switcher']}>
@@ -31,6 +31,9 @@ const LayoutHeader = () => {
 						<div className={styles['actions-profile']}>
 							<ProfileDropdown></ProfileDropdown>
 						</div>
+					</div>
+					<div className={`${styles['actions-search']}, ${styles['actions-search-xs']}`}>
+						<TemplateSearchInput></TemplateSearchInput>
 					</div>
 				</div>
 			</div>

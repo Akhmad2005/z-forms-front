@@ -1,3 +1,5 @@
+@import '/app/[locale]/globals/mixins';
+
 .dashbord_page{
 	overflow: hidden;
 	height: 100%;
@@ -38,6 +40,12 @@
 		}
 		&-add{
 			margin-top: 12px;
+		}
+	}
+
+	@include devices(sm) {
+		&-question{
+			padding: 6px 12px;
 		}
 	}
 }

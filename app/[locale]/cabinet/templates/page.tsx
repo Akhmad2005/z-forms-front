@@ -206,13 +206,17 @@ const App = () => {
 			</header>
 			<main className={'dashbord_page-main'}>
 				<Table 
+					scroll={{
+						x: 'max-content'
+					}}
 					loading={loading}
 					rootClassName='custom-ant-table'
 					columns={columns}
 					dataSource={data}
 					rowHoverable={true}
 					pagination={{
-						position: ['bottomCenter']
+						position: ['bottomCenter'],
+						hideOnSinglePage: true
 					}}
 					bordered={true}
 				></Table>

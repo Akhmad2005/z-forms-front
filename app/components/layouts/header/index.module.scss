@@ -1,3 +1,5 @@
+@import '../../../[locale]/globals/mixins';
+
 .header{
 	&-wrapper{
 		padding: 24px 0;
@@ -13,4 +15,32 @@
 	display: flex;
 	gap: 12px;
 	align-items: center;
+}
+
+@include devices(sm) {
+	.header{
+		&-wrapper{
+      padding: 12px 0;
+    }
+	}
+	.logo{
+		h1{
+			font-size: 28px;
+		}
+	}
+}
+
+.actions-search-xs{
+  display: none;
+}
+
+@include devices(xxs) {
+	.actions-search-xl{
+		display: none;
+	}
+	.actions-search-xs{
+		margin-top: 8px;
+		display: block;
+		width: 100%;
+	}
 }

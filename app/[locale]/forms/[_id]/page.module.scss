@@ -1,7 +1,14 @@
+@import '/app/[locale]/globals/mixins';
+
 .page{
 	height: 100%;
 	overflow: hidden auto;
 	&-wrapper{
 		padding: 40px 0;
+	}
+	@include devices(sm) {
+		&-wrapper{
+			padding: 16px 0;
+		}
 	}
 }

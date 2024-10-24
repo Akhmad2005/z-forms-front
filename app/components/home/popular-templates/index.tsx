@@ -104,6 +104,9 @@ const HomePopularTemplates = () => {
 				</div>
 				<div className="">
 					<Table 
+						scroll={{
+							x: 'max-content'
+						}}
 						rowKey='_id'
 						loading={loading}
 						columns={columns}

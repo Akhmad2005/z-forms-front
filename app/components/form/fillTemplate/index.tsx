@@ -266,7 +266,7 @@ const FillTemplateForm = ({mode, feedback = true}: Props) => {
 						<div className={styles['page-questions']}>
 							{
 								templateData?.questions.map((question, i) => (
-                  <Form.Item name={question._id} key={question._id} rules={[{required: true, message: t('RequiredField')}]}>
+                  <Form.Item style={{marginBottom: 16}} name={question._id} key={question._id} rules={[{required: true, message: t('RequiredField')}]}>
 										<FormQuestionCard mode={pageMode} formKey={question._id as string} form={form} question={question} index={i}/>
                   </Form.Item>
                 ))

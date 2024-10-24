@@ -2,7 +2,7 @@
 
 import { Dropdown, Avatar, Modal, Button } from "antd";
 import type { MenuProps } from "antd";
-import {UserOutlined} from '@ant-design/icons'
+import {HomeOutlined, UserOutlined} from '@ant-design/icons'
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
 import { useMemo, useState } from "react";
@@ -56,6 +56,7 @@ const ProfileDropdown = () => {
 			arr.unshift(
 				{
 					key: '1',
+					icon: <HomeOutlined/>,
 					label: (
 						<Link 
 							href="/"
@@ -66,6 +67,7 @@ const ProfileDropdown = () => {
 						</Link>
 					),
 				},
+				...cabinetSidebarMenuItems(router, t, cookies) || []
 			)
 		}
 		return arr
@@ -86,13 +88,13 @@ const ProfileDropdown = () => {
 					onClick={handleClickAvatar}
 					style={{backgroundColor: 'var(--primary-color)'}} 
 					className="link" 
-					size={'large'}
+					size={'default'}
 				>
 					<UserOutlined></UserOutlined>
 				</Avatar>
 				:
 				<Dropdown trigger={["click"]} placement="bottomRight" menu={{items: menuList}}>
-					<Avatar style={{backgroundColor: 'var(--primary-color)'}} className="link" size={'large'}>
+					<Avatar style={{backgroundColor: 'var(--primary-color)'}} className="link" size={'default'}>
 						<UserOutlined></UserOutlined>
 					</Avatar>
 				</Dropdown>

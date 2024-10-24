@@ -20,7 +20,10 @@ const HomeLatestTemplates = () => {
 	const RenderList = useMemo(() => {
 		if (loading) {
 			return (
-				<Row justify={'center'}> 
+				<Row justify={'center'} gutter={[
+					{ xl: 24, xs: 12, sm: 12, },
+					{ xl: 24, xs: 12, sm: 12, },
+				]}> 
 					<Col>
 						<Spin spinning={loading}></Spin>
 					</Col>
@@ -28,10 +31,13 @@ const HomeLatestTemplates = () => {
 			)
 		} else if (data?.length) {
 			return (
-				<Row justify={"start"} gutter={[24, 24]}>
+				<Row justify={"start"} gutter={[
+					{ xl: 24, xs: 12, sm: 12, },
+					{ xl: 24, xs: 12, sm: 12, },
+				]}>
 					{
 						data.map((template, index) => (
-							<Col key={index} span={6}>
+							<Col key={index} xs={24} md={12} xl={6}>
 								<Link href={`/forms/create?templateId=${template._id}`}>
 									<CardTemplate template={template}/>
 								</Link>
@@ -42,7 +48,10 @@ const HomeLatestTemplates = () => {
 			)
 		} else {
 			return (
-				<Row justify={'center'}> 
+				<Row gutter={[
+					{ xl: 24, xs: 12, sm: 12, },
+					{ xl: 24, xs: 12, sm: 12, },
+				]} justify={'center'}> 
 					<Col>
 						<Empty image={Empty.PRESENTED_IMAGE_SIMPLE}></Empty>
 					</Col>

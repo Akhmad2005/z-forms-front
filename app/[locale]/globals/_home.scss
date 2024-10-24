@@ -1,3 +1,5 @@
+@import './mixins';
+
 .home-section{
 	padding: 40px 0;
 	&-small{
@@ -6,4 +8,16 @@
 	&-title{
 		margin-bottom: 24px;
 	}
+}
+
+@include devices(sm) {
+	.home-section{
+    padding: 16px 0;
+		&-small{
+			padding: 10px 0;
+		}
+		&-title{
+			margin-bottom: 12px;
+		}
+  }
 }

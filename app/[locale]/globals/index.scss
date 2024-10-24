@@ -135,3 +135,14 @@ a {
     color: var(--link-color);
   }
 }
+
+@include devices(sm) {
+  .container{
+    max-width: calc(1920px - 32px);
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .ant-form-item{
+    margin-bottom: 12px !important;
+  }
+}

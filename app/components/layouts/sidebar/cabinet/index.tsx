@@ -22,7 +22,7 @@ const CabinetSidebar = () => {
 	const activeMenuItem = useMemo(() => {
 		const key = pathName?.split('/').at(-1);
 		return [key || '']
-	}, [menuItems(router, t, cookies)?.length])
+	}, [pathName])
 
 	return (
 		<div>

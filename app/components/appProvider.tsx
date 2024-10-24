@@ -27,12 +27,31 @@ const AppProvider = ({children, locale}: Props ) => {
 
 	const [styles, setStyles] = useState<any>()
 
+	const [size, setSize] = useState<'small' | 'middle'>('middle');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setSize('small');
+      } else {
+        setSize('middle');
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
 		setStyles(getComputedStyle(document.documentElement))
   }, [theme]);
 
 	return (
 		<ConfigProvider 
+			componentSize={size}
 			locale={locales[locale]}
 			renderEmpty={() => <GEmpty />}
 			select={{

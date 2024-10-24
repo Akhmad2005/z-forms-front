@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import styles from './index.module.scss'
 import { List, Avatar, Input, Button, Form, Row, Col, Space, message } from 'antd'
 import {DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined, SendOutlined} from '@ant-design/icons'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { TemplateReaction, TemplateComment } from '@/utilities/interfaces/template'
 import { useCookies } from 'next-client-cookies'
 import { useRouter } from '@/i18n/routing'
@@ -114,6 +114,24 @@ const TemplateComments = ({templateId}: Props) => {
 		}
 	}
 
+	const [layout, setLayout] = useState<'horizontal' | 'vertical'>('horizontal');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setLayout('vertical');
+      } else {
+        setLayout('horizontal');
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
 	useEffect(() => {
 		if (parsedToken?._id) {
 			fetchReaction();
@@ -137,6 +155,7 @@ const TemplateComments = ({templateId}: Props) => {
 						pageSize: 4,
 						hideOnSinglePage: true
 					}}
+					itemLayout={layout}
 					dataSource={commentsData}
 					renderItem={(item) => (
 						<List.Item 

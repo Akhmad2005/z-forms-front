@@ -1,6 +1,16 @@
+@import '/app/[locale]/globals/mixins';
+
 .card{
 	&-title{
 		text-align: center;
 		margin-bottom: 12px;
+	}
+
+	@include devices(sm) {
+		&-title{
+			h1{
+				font-size: 26px;
+			}
+		}
 	}
 }
