@@ -78,10 +78,11 @@ const App = () => {
 			title: t('question', {count: 'other'}),
 			dataIndex: 'onTableVisibleQuestions',
 			key: 'onTableVisibleQuestions',
+			width: 600,
 			render: (questions: FormListQuestion[]) => (
 				<div>
 					{questions.map((question) => (
-						<div key={question._id}>
+						<div className="table-question-answer" key={question._id}>
 							<strong>{question.title}:</strong> {question.answer}
 						</div>
 					))}

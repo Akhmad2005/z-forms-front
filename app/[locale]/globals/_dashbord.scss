@@ -49,3 +49,7 @@
 		}
 	}
 }
+
+.table-question-answer{
+	@include text-splice(2);
+}

@@ -118,6 +118,10 @@ a {
   color: var(--text-active-color) !important;
 }
 
+:where(.css-dev-only-do-not-override-1hzxtly).ant-table-wrapper .ant-table-cell-fix-left, :where(.css-dev-only-do-not-override-1hzxtly).ant-table-wrapper .ant-table-cell-fix-right{
+  background-color: var(--background-color) !important;
+}
+
 .swiper-button{
   cursor: pointer;
   &-disabled{

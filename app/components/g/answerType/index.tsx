@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 import { useMemo } from "react"
 import { useCookies } from 'next-client-cookies';
 import { parseJwt } from '@/utilities/functions/jwtParser';
+import dayjs from 'dayjs';
 
 interface Props {
 	type: AnswerTypeEnum
@@ -87,7 +88,7 @@ const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
 				return (
 					<DatePicker
 						disabled={!parsedToken?._id}
-						defaultValue={form.getFieldValue(formKey)}
+						defaultValue={form.getFieldValue(formKey) ? dayjs(form.getFieldValue(formKey), 'DD.MM.YYYY') : undefined}
 						style={{width: '100%'}}
 						placeholder={mainPlaceholder}
 						format={'DD.MM.YYYY'}
@@ -100,7 +101,7 @@ const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
 				return (
 					<TimePicker
 						disabled={!parsedToken?._id}
-						defaultValue={form.getFieldValue(formKey)}
+						defaultValue={form.getFieldValue(formKey) ? dayjs(form.getFieldValue(formKey), 'HH:mm') : undefined}
 						style={{width: '100%'}}
 						placeholder={mainPlaceholder}
 						format={'HH:mm'}
@@ -113,7 +114,7 @@ const AnswerTypeItem = ({type, placeholder, form, formKey}: Props) => {
 				return (
 					<DatePicker
 						disabled={!parsedToken?._id}
-						defaultValue={form.getFieldValue(formKey)}
+						defaultValue={form.getFieldValue(formKey) ? dayjs(form.getFieldValue(formKey), 'DD.MM.YYYY HH:mm') : undefined}
 						showTime={true}
 						style={{width: '100%'}}
 						placeholder={mainPlaceholder}
