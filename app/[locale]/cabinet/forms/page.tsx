@@ -19,7 +19,7 @@ const App = () => {
 	const [mounted, setMounted] = useState<boolean>(false)
 	const t = useTranslations();
 	const [loading, setLoading] = useState<boolean>(false)
-	const [data, setData] = useState([])
+	const [data, setData] = useState<FormListItem[]>([])
 
 	const columns: TableProps['columns'] = [
 		{
@@ -70,6 +70,25 @@ const App = () => {
 			key: 'templateTitle',
 		},
 		{
+			title: t('CreatedDate'),
+			dataIndex: 'createdDate',
+			key: 'createdDate',
+		},
+		{
+			title: t('question', {count: 'other'}),
+			dataIndex: 'onTableVisibleQuestions',
+			key: 'onTableVisibleQuestions',
+			render: (questions: FormListQuestion[]) => (
+				<div>
+					{questions.map((question) => (
+						<div key={question._id}>
+							<strong>{question.title}:</strong> {question.answer}
+						</div>
+					))}
+				</div>
+			),
+		},
+		{
 			title: '',
 			render: (text: string, record) => (
         <div>
@@ -80,7 +99,7 @@ const App = () => {
 							icon={<EditFilled/>} 
 						/>
 						<Popconfirm 
-							// onConfirm={() => deleteData(record._id)} 
+							onConfirm={() => deleteData(record._id)} 
 							placement='left' 
 							title={t('ConfirmTheAction')}
 						>
@@ -94,15 +113,31 @@ const App = () => {
 		}
 	]
 
+	const deleteData = async (_id: string) => {
+		try {
+      await fetchClient({
+        endpoint: `/forms/${_id}`,
+        options: {
+					method: 'DELETE',
+				},
+        cookies: cookies,
+				router,
+      }); 
+      await fetchData();
+    } catch (error: any) {
+      console.error(error);
+    }
+	}
+
 	const fetchData = async () => {
 		setLoading(true);
 		try {
-			const data = await fetchClient({
+			const data: FormListItem[] = await fetchClient({
 				endpoint: '/forms',
 				cookies: cookies,
 				router: router,
 			}); 
-			setData(data);
+			setData(data); 
 		} catch (error: any) {
 			console.error(error);
 			message.error(t('fetchError.fetchData'));

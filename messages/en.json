@@ -101,5 +101,6 @@
 	"FilledForms": "Filled forms",
 	"RequiredFiled": "Required field",
 	"SearchTemplates": "Search templates",
-	"InformationDeleteUser": "All your data, including personal information, saved templates, and any associated content, will be deleted."
+	"InformationDeleteUser": "All your data, including personal information, saved templates, and any associated content, will be deleted.",
+	"CreatedDate": "Date of creation"
 }

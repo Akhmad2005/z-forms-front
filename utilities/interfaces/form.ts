@@ -11,3 +11,19 @@ interface Answer {
   answer: any;
 	_id: string;
 }
+
+interface FormListItem {
+	createdDate: string;
+	onTableVisibleQuestions: FormListQuestion[]
+	templateId: string;
+	templateTitle: string;
+	userId: string;
+	user: string;
+	_id: string;
+}
+
+interface FormListQuestion {
+  title: string;
+  answer: any;
+	_id: string;
+}
