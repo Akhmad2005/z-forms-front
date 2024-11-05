@@ -69,12 +69,14 @@
 	"fetchError": {
 		"fetchData": "Ошибка при получении данных",
 		"changeData": "Ошибка при изменении данных",
+		"deleteData": "Ошибка при удалении данных",
 		"createData": "Ошибка при создании данных",
 		"notAllowed": "Действия не разрешены"
 	},
 	"fetchSuccess": {
 		"createdData": "Успешно создано",
-		"editedData": "Успешно отредактировано"
+		"editedData": "Успешно отредактировано",
+		"deletedData": "Успешно удалено"
 	},
 	"actions": "Действия",
 	"ConfirmTheAction": "Подтвердите действие",
@@ -99,5 +101,14 @@
 	"RequiredField": "Обязательное поле",
 	"SearchTemplates": "Поиск шаблонов",
 	"InformationDeleteUser": "Все ваши данные, включая личную информацию, сохраненные шаблоны и любой связанный с ними контент, будут удалены.",
-	"CreatedDate": "Дата создания"
+	"CreatedDate": "Дата создания",
+	"profile": "Профиль",
+	"BasicInformation": "Основная информация",
+	"ConnectAccountToSalesForce": "Подключите учетную запись к <element>Salesforce</element>",
+	"connect": "Подключить",
+	"connected": "Подключено",
+	"cancel": "Отменить",
+	"lastName": "Фамилия",
+	"firstName": "Имя",
+	"DeleteAccountFromSalesforce": "Удалить учетную запись из Salesforce"
 }

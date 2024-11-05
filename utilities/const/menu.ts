@@ -1,6 +1,6 @@
 import React from 'react';
 import { MenuProps } from 'antd';
-import {UserOutlined, FileOutlined, FileDoneOutlined} from '@ant-design/icons'
+import {UserOutlined, ProfileOutlined, FileOutlined, FileDoneOutlined} from '@ant-design/icons'
 import { Cookies } from 'next-client-cookies';
 import { parseJwt } from '../functions/jwtParser';
 import { RoleEnum } from '../enums/role';
@@ -12,7 +12,7 @@ export const menuItems = (router: any, t: any, cookies: Cookies): MenuProps['ite
     role = parseJwt(token).role as RoleEnum || RoleEnum.user;
   }
   
-  const uniqueMenuItems: MenuProps['items'] = [
+  const defaultMenuItems: MenuProps['items'] = [
     {
       onClick: () => {
         router.push('/cabinet/templates')
@@ -29,6 +29,14 @@ export const menuItems = (router: any, t: any, cookies: Cookies): MenuProps['ite
       icon: React.createElement(FileDoneOutlined),
       label: t('menu.Forms'),
     },
+    {
+      onClick: () => {
+        router.push('/cabinet/profile')
+      },
+      key: 'profile',
+      icon: React.createElement(ProfileOutlined),
+      label: t('profile'),
+    },
   ]
 
   const adminMenuItems: MenuProps['items'] = [
@@ -43,8 +51,8 @@ export const menuItems = (router: any, t: any, cookies: Cookies): MenuProps['ite
   ] 
 
   if (role == RoleEnum.user) {
-    return [...uniqueMenuItems]
+    return [...defaultMenuItems]
   } else if (role == RoleEnum.admin) {
-    return [ ...adminMenuItems, ...uniqueMenuItems,]
+    return [ ...adminMenuItems, ...defaultMenuItems,]
   }
 } 

@@ -72,12 +72,14 @@
 	"fetchError": {
 		"fetchData": "Error in fetching data",
 		"changeData": "Error in changing data",
+		"deleteData": "Error in deleting data",
 		"createData": "Error in creating data",
 		"notAllowed": "Actions not allowed"
 	},
 	"fetchSuccess": {
 		"createdData": "Successfully created",
-		"editedData": "Successfully edited"
+		"editedData": "Successfully edited",
+		"deletedData": "Successfully deleted"
 	},
 	"actions": "Actions",
 	"ConfirmTheAction": "Confirm the action",
@@ -102,5 +104,14 @@
 	"RequiredField": "Required field",
 	"SearchTemplates": "Search templates",
 	"InformationDeleteUser": "All your data, including personal information, saved templates, and any associated content, will be deleted.",
-	"CreatedDate": "Date of creation"
+	"CreatedDate": "Date of creation",
+	"profile": "Profile",
+	"BasicInformation": "Basic information",
+	"ConnectAccountToSalesForce": "Connect the account to the <element>Salesforce</element>",
+	"connect": "Connect",
+	"connected": "Connected",
+	"cancel": "Cancel",
+	"lastName": "Last name",
+	"firstName": "First name",
+	"DeleteAccountFromSalesforce": "Delete the account from the Salesforce"
 }

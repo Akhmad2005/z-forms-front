@@ -11,6 +11,11 @@ import { Locale } from 'antd/es/locale';
 
 import 'dayjs/locale/ru';
 import 'dayjs/locale/en-gb';
+import { useCookies } from 'next-client-cookies';
+import { fetchClient } from '@/utilities/functions/fetchClient';
+import { useRouter } from '@/i18n/routing';
+
+import { connectToSalesforce } from '@/utilities/functions/salesforce';
 
 const locales: {[key: string]: Locale} = {
 	ru: ruRU,
@@ -24,9 +29,10 @@ interface Props {
 
 const AppProvider = ({children, locale}: Props ) => {
 	const {theme} = useTheme();
-
+	const cookies = useCookies();
+	const router = useRouter();
 	const [styles, setStyles] = useState<any>()
-
+	const salesforceToken = cookies.get('salesforce-token')
 	const [size, setSize] = useState<'small' | 'middle'>('middle');
 
   useEffect(() => {
@@ -44,6 +50,13 @@ const AppProvider = ({children, locale}: Props ) => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+	useEffect(() => {
+		let salesforceToken = cookies.get('salesforce-token');
+		if (!salesforceToken) {
+			connectToSalesforce({cookies, router});
+		}
+	}, [salesforceToken])
 
   useEffect(() => {
 		setStyles(getComputedStyle(document.documentElement))
@@ -126,6 +139,9 @@ const AppProvider = ({children, locale}: Props ) => {
 					},
 					Avatar: {
 						colorTextPlaceholder: 'var(--primary-color)',
+					},
+					Form: {
+						itemMarginBottom: 8
 					}
 				}
 			}}

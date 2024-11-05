@@ -43,6 +43,7 @@ async function RootLayout({
   params: {locale: string};
 }>) {
   const messages = await getMessages();
+
   return (
     <html suppressHydrationWarning lang={params.locale} >
       <head>

@@ -72,7 +72,7 @@ const FillTemplateForm = ({mode, feedback = true}: Props) => {
 		} catch (error) {
 			let status;
 			if (error instanceof Error && typeof error.message === 'string') {
-				const splitError = error.message.split(':');
+				const splitError = error?.message?.split(':');
 				status = splitError.at(-1);
 				if (Number(status) == 405) {
 					message.error(t('fetchError.notAllowed'))
@@ -102,7 +102,7 @@ const FillTemplateForm = ({mode, feedback = true}: Props) => {
 		} catch (error) {
 			let status;
 			if (error instanceof Error && typeof error.message === 'string') {
-				const splitError = error.message.split(':');
+				const splitError = error?.message?.split(':');
 				status = splitError.at(-1);
 				if (Number(status) == 405) {
 					message.error(t('fetchError.notAllowed'))

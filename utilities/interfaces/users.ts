@@ -8,6 +8,7 @@ export interface User {
 	role: RoleEnum;
 	status: UserStatus
 	_id: string;
+	salesforceAccountId: string;
 }
 
 type UserStatus = 'active' | 'blocked'
